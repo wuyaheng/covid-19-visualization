@@ -45,10 +45,12 @@ class App extends Component {
               <a href="#" className="brand-logo center">Covid-19 Visualization</a>
             </div>
           </nav>
-        
         <div className="container-fluid mt-2">
         <div className="row mb-0">
-        <div className="col-md-12">
+        <div className="col-md-4">
+
+        </div>
+        <div className="col-md-8">
         <div className="card">
           <MapBox results = {data}/>
           </div>

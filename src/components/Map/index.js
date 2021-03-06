@@ -41,32 +41,33 @@ export default (props) => {
      // Add our marker cluster layer to the map
      confirmMap.addLayer(markers);
 
-                // var geoJson = L.geoJson(props.pins.geoData, {
-                // style: function(feature) {
-                //     return {
-                //     color: "white",
-                //     fillOpacity: 0.8,
-                //     weight: 1.5
-                //     };
-                // },
-                // onEachFeature: function(feature, layer) {
-                //     layer.on({
-                //     mouseover: function(event) {
-                //         layer = event.target;
-                //         layer.setStyle({
-                //         fillOpacity: 1
-                //         });
-                //     },
-                //     mouseout: function(event) {
-                //         geoJson.resetStyle(event.target);
-                //     },
-                //     click: function(event) {
-                //       confirmMap.fitBounds(event.target.getBounds()); 
-                //     }
-                //     });
-                //     layer.bindTooltip("<p><b>" + feature.properties.sovereignt + "</b></p>");
-                // }
-                // }).addTo(confirmMap);
+                var geoJson = L.geoJson(props.pins.geoData, {
+                style: function(feature) {
+                    return {
+                    color: "white",
+                    fillColor: "lightblue",
+                    fillOpacity: 0.7,
+                    weight: 1.5
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.on({
+                    mouseover: function(event) {
+                        layer = event.target;
+                        layer.setStyle({
+                        fillOpacity: 1
+                        });
+                    },
+                    mouseout: function(event) {
+                        geoJson.resetStyle(event.target);
+                    },
+                    click: function(event) {
+                      confirmMap.fitBounds(event.target.getBounds()); 
+                    }
+                    });
+                    layer.bindTooltip("<p><b>" + feature.properties.sovereignt + "</b></p>");
+                }
+                }).addTo(confirmMap);
     }
 
     return () => (MAP_CONTAINER2.innerHTML = "");
