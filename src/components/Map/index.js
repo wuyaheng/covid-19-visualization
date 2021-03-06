@@ -28,18 +28,13 @@ export default (props) => {
         }
       ).addTo(confirmMap);
 
-        // Create a new marker cluster group
-        var markers = L.markerClusterGroup();
 
         var fixUndefined = (item) => (typeof (item) !== 'undefined' ? item : 'Unknown'); 
 
       props.pins.confirmData.forEach((pin) =>
       (pin.combinedKey && pin.lat && pin.long) ? 
-      markers.addLayer(L.marker([pin.lat, pin.long]).bindTooltip('<b>' + fixUndefined(pin.combinedKey) + '</b><p><b>Confirmed:</b> ' + fixUndefined(pin.confirmed) + '</p>') 
-   ) : null );
-
-     // Add our marker cluster layer to the map
-     confirmMap.addLayer(markers);
+      L.marker([pin.lat, pin.long]).addTo(confirmMap).bindTooltip('<b>' + fixUndefined(pin.combinedKey) + '</b><p><b>Confirmed:</b> ' + fixUndefined(pin.confirmed) + '</p>') 
+   : null );
 
                 var geoJson = L.geoJson(props.pins.geoData, {
                 style: function(feature) {
