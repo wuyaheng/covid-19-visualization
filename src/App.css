@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+  }
+  
+
+  #map-container {
+    height: 550px;
+  }
+
+  #mapid {
+    height: 550px;
+  }
+  
+  .leaflet-popup-content {
+    text-align: center;
+  }
+  
+  .parallax-marker.label {
+    display: block;
+    font-weight: bold;
+    color: rgb(98, 56, 128);
+    text-align: center;
+    text-shadow: rgb(255, 255, 255) 1px 0 1px, rgb(255, 255, 255) -1px 0 1px, rgb(255, 255, 255) 0 -1px 1px, rgb(255, 255, 255) 0 1px 1px;
+    text-transform: uppercase;
+  }
+  
+  .parallax-marker.label.huge {
+    font-size: 96px;
+    color: rgba(185, 157, 185, 0.39);
+    text-shadow: none;
+  }
+  
+  .parallax-marker.label.big {
+    font-size: 24px;
+  }
+  
+  .parallax-marker.label.medium {
+    font-size: 16px;
+    font-weight: normal;
+    color: rgb(121, 85, 125);
+  }
+  
+  .parallax-marker.label.small {
+    font-size: 12px;
+    font-weight: normal;
+    color: rgb(137, 128, 144);
+    text-transform: none;
+  }
+  
+  h4, h5 {
+    text-align: center;
+  }
+
+  .brand-logo {
+    font-size: 1.5rem !important;
+  }
+
+  select {
+    display: block !important;
+  }
+
+  select:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .numberOfSchools {
+    font-weight: 650;
+    color: #455a64;
+  }
+
+  h6 {
+    color: #455a64 !important;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .leaflet-tooltip{
+    width: 300px !important;
+    white-space: normal !important; 
+  }
+
+  p {
+    padding: 0rem;
+    margin: 0rem;
+  }
+
+
+
+
+.ag-body-horizontal-scroll-viewport {
+    overflow-x: none !important;
+}
+
+canvas {
+  height: 325px !important;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .brand-logo {
+    font-size: 1rem !important;
+  }
+}
