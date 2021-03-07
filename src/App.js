@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapBox from "./components/MapBox/index";
-import geodata from "./data/world.json";
+import geodata from "./data/countries.json";
 import axios from "axios";
 
 const url = 'https://covid19.mathdro.id/api';

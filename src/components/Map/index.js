@@ -60,7 +60,7 @@ export default (props) => {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.bindTooltip("<p><b>" + feature.properties.sovereignt + "</b></p>");
+                    layer.bindTooltip("<p><b>" + feature.properties.ADMIN + "</b></p>");
                 }
                 }).addTo(confirmMap);
     }
