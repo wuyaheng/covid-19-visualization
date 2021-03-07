@@ -31,12 +31,12 @@ export default (props) => {
 
         var fixUndefined = (item) => (typeof (item) !== 'undefined' ? item : 'Unknown'); 
 
-      props.pins.confirmData.forEach((pin) =>
-      (pin.combinedKey && pin.lat && pin.long) ? 
-      L.marker([pin.lat, pin.long]).addTo(confirmMap).bindTooltip('<b>' + fixUndefined(pin.combinedKey) + '</b><p><b>Confirmed:</b> ' + fixUndefined(pin.confirmed) + '</p>') 
+      props.pins.forEach((pin) =>
+      (pin?.properties?.covid?.lat && pin?.properties?.covid?.long) ? 
+      L.marker([pin.properties.covid.lat, pin.properties.covid.long]).addTo(confirmMap).bindTooltip('<b>' + fixUndefined(pin.properties.covid.recovered) + '</b><p><b>Confirmed:</b> ' + fixUndefined(pin.properties.covid.confirmed) + '</p>') 
    : null );
 
-                var geoJson = L.geoJson(props.pins.geoData, {
+                var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
                     return {
                     color: "white",

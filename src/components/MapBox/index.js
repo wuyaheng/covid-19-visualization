@@ -4,17 +4,10 @@ import Map from "./../Map/index";
 
 function MapBox(props) {
 
-    let lat = props.results.confirmData.reduce((t, r) => t + parseFloat(r.lat), 0) / props.results.confirmData.length;
 
-    let lon = props.results.confirmData.reduce((t, r) => t + parseFloat(r.long), 0) / props.results.confirmData.length;
+        const lat = 39.74739
 
-    if(!lat) {
-        lat = 39.74739
-    }
-
-    if(!lon) {
-        lon = -5
-    }
+        const lon = -5
 
     return (
         <>

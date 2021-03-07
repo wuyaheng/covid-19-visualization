@@ -38,6 +38,45 @@ class App extends Component {
       confirmData: this.state.confirm 
     }
 
+    let condensedData = data.confirmData.reduce(function(dict, item) {
+      let { confirmed, deaths, recovered, iso3, lastUpdate, lat, long } = item;
+      let country = dict[iso3]
+      if(country) {
+        country.deaths+=deaths
+        country.confirmed+=confirmed
+        country.recovered+=recovered
+        country.lastUpdate=lastUpdate
+        country.lat=lat || country.lat
+        country.long=long ? long: country.long
+      } else {
+        dict[iso3] = {
+          confirmed,
+          deaths,
+          recovered,
+          lastUpdate,
+          lat,
+          long
+        }
+      }
+      return dict;
+    },{})
+
+    console.log(condensedData)
+
+    const updatedGeoData = data.geoData.map((item) => {
+      const iso3 = item.properties.ISO_A3;
+      const countryData = condensedData[iso3];
+      if(countryData) {
+        item.properties.covid = countryData
+      }
+
+      return item;
+
+    })
+
+    console.log(updatedGeoData)
+
+
       return (
         <>
           <nav>
@@ -52,7 +91,7 @@ class App extends Component {
         </div>
         <div className="col-md-8">
         <div className="card">
-          <MapBox results = {data}/>
+          <MapBox results = {updatedGeoData}/>
           </div>
         </div>
         </div>
