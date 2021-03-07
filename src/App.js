@@ -77,11 +77,13 @@ class App extends Component {
 
       return (
         <>
-          <nav>
-            <div className="nav-wrapper #455a64 blue-grey darken-2">
-              <a href="#" className="brand-logo center">Covid-19 Visualization</a>
-            </div>
-          </nav>
+          <nav className="navbar navbar-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Covid-19 Visualization
+          </a>
+        </div>
+      </nav>
         <div className="container-fluid mt-2">
         <div className="row mb-0">
         <div className="col-md-3">
