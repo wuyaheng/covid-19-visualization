@@ -106,3 +106,71 @@ canvas {
     font-size: 1rem !important;
   }
 }
+
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 0.2rem;
+  /* background-color: #bbb; */
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+
+.first {
+  background-color: grey;
+}
+
+.ten {
+  background-color: "#3B0000";
+}
+
+.nine {
+  background-color: "#4F1818"
+} 
+
+.eight {
+  background-color: "#681A1A"
+} 
+
+.seven {
+  background-color: "#87101a"
+} 
+
+.six {
+  background-color: "#a31420";
+} 
+
+.five {
+  background-color: "#bc5059";
+} 
+.four {
+  background-color: "#E3B7BA";
+} 
+.third {
+  background-color: "#D0979A";
+} 
+.dot.second {
+  background-color: red; 
+} 
+
+
+
+
+.legend {
+  padding: 7px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legendIcon {
+  display: inline-block;
+  border-radius: 50%;
+  padding: 0.5em 0.5em;
+}

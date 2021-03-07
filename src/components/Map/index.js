@@ -28,10 +28,8 @@ export default (props) => {
         return "#D0979A";
       } else if (x >= 500) {
         return "#E3B7BA";
-      } else if (x >= 100) {
-        return "#FFE6EA"
       } else {
-        return "white"
+        return "grey"
       }
   }
 
@@ -85,7 +83,28 @@ export default (props) => {
       // Create a control for our layers, add our overlay layers to it
       L.control.layers(null, overlays).addTo(confirmMap);
 
-
+            // Create a legend to display information about our map
+            var info = L.control({
+              position: "bottomright"
+            });
+      
+            // When the layer control is added, insert a div with the class of "legend"
+            info.onAdd = function() {
+              var div = L.DomUtil.create("div", "legend");
+              div.innerHTML += "<span class='dot first'></span>0 - 500<br/>"; 
+              div.innerHTML += "<span class='dot second'></span>500 - 1000<br/>"; 
+              div.innerHTML += "<span class='dot third'></span>1000 - 10000<br/>";
+              div.innerHTML += "<span class='dot four'></span>10000 - 100000<br/>";  
+              div.innerHTML += "<span class='dot five'></span>100000 - 1000000<br/>"; 
+              div.innerHTML += "<span class='dot six'></span>1000000 - 2500000<br/>"; 
+              div.innerHTML += "<span class='dot seven'></span>2500000 - 5000000<br/>"; 
+              div.innerHTML += "<span class='dot eight'></span>5000000 - 10000000<br/>"; 
+              div.innerHTML += "<span class='dot nine'></span>10000000 - 20000000<br/>"; 
+              div.innerHTML += "<span class='dot ten'></span>20000000 + <br/>"; 
+              return div;
+            }; 
+            // Add the info legend to the map
+            info.addTo(confirmMap);
 
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
