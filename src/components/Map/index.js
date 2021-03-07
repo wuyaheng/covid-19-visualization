@@ -32,12 +32,6 @@ export default (props) => {
 
         var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
 
-      props.pins.forEach((pin) =>
-      (pin?.properties?.covid?.lat && pin?.properties?.covid?.long) ? 
-      L.marker([pin.properties.covid.lat, pin.properties.covid.long]).addTo(confirmMap).bindTooltip('<p><b>' + pin.properties.ADMIN + 
-      '</b></p><p><b>Confirmed:</b> ' + pin.properties.covid.confirmed + '</p><p><b>Death: </b>' + pin.properties.covid.deaths + '</p><p><b>Last Update: </b>' + moment(pin.properties.covid.lastUpdate).format('L') + '</p>') 
-   : null );
-
 
       function chooseColor(x) {
         if (x > 20000000) {
