@@ -30,7 +30,7 @@ export default (props) => {
       ).addTo(confirmMap);
 
 
-        var fixUndefined = (item) => (typeof (item) !== 'undefined' ? item : 'Unknown'); 
+        var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
 
       props.pins.forEach((pin) =>
       (pin?.properties?.covid?.lat && pin?.properties?.covid?.long) ? 
@@ -69,7 +69,7 @@ export default (props) => {
     function numberWithCommas(x) {
       if (x !== undefined) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
+      } 
   }
 
                 var geoJson = L.geoJson(props.pins, {
@@ -96,7 +96,7 @@ export default (props) => {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(feature?.properties?.covid?.confirmed) + "</b></p><p><b>Deaths: " + numberWithCommas(feature?.properties?.covid?.deaths) + "</b></p><p><b>Last Update: " + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</b></p>");
+                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p><p><b>Deaths: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p><p><b>Last Update: " + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</b></p>");
                 }
                 }).addTo(confirmMap);
     }
