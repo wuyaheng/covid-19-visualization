@@ -40,25 +40,34 @@ export default (props) => {
 
 
       function chooseColor(x) {
-        if (x >= 900000) {
-          return "#641220"
-        } else if (x >= 50000) {
-          return "#6e1423";
+        if (x > 20000000) {
+          return "#3B0000"
+        } else if (x > 10000000) {
+          return "#4F1818"
+        } else if (x >= 5000000) {
+          return "#681A1A"
+        } else if (x >= 2500000) {
+          return "#87101a"
+        } else if (x >= 1000000) {
+          return "#a31420";
+        } else if (x >= 100000) {
+          return "#bc5059";
+        } else if (x >= 10000) {
+          return "#BD777A";
         } else if (x >= 1000) {
-          return "#85182a";
+          return "#D0979A";
+        } else if (x >= 500) {
+          return "#E3B7BA";
         } else if (x >= 100) {
-          return "#a11d33";
-        } else if (x >= 10) {
-          return "#a71e34";
+          return "#FFE6EA"
         } else {
-          return "black";
+          return "white"
         }
     }
 
 
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
-                  console.log(feature.properties.covid?.confirmed)
                     return {
                     color: "white",
                     fillColor: chooseColor(feature?.properties?.covid?.confirmed),
@@ -71,7 +80,7 @@ export default (props) => {
                     mouseover: function(event) {
                         layer = event.target;
                         layer.setStyle({
-                        fillOpacity: 1
+                        fillOpacity: 0.9
                         });
                     },
                     mouseout: function(event) {

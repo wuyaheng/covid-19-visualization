@@ -84,10 +84,10 @@ class App extends Component {
           </nav>
         <div className="container-fluid mt-2">
         <div className="row mb-0">
-        <div className="col-md-4">
+        <div className="col-md-3">
 
         </div>
-        <div className="col-md-8">
+        <div className="col-md-9">
         <div className="card">
           <MapBox results = {updatedGeoData}/>
           </div>

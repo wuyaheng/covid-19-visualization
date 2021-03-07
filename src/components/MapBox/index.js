@@ -5,9 +5,9 @@ import Map from "./../Map/index";
 function MapBox(props) {
 
 
-        const lat = 39.74739
+        const lat = 30
 
-        const lon = -5
+        const lon = 2
 
     return (
         <>
