@@ -1,6 +1,7 @@
 import React from "react";
 import L from "leaflet";
 import 'leaflet.markercluster';
+import moment from 'moment'
 
 
 export default (props) => {
@@ -34,7 +35,7 @@ export default (props) => {
       props.pins.forEach((pin) =>
       (pin?.properties?.covid?.lat && pin?.properties?.covid?.long) ? 
       L.marker([pin.properties.covid.lat, pin.properties.covid.long]).addTo(confirmMap).bindTooltip('<p><b>' + pin.properties.ADMIN + 
-      '</b></p><p><b>Recovered: </b>' + pin.properties.covid.recovered + '</p><p><b>Confirmed:</b> ' + pin.properties.covid.confirmed + '</p>') 
+      '</b></p><p><b>Recovered: </b>' + pin.properties.covid.recovered + '</p><p><b>Confirmed:</b> ' + pin.properties.covid.confirmed + '</p><p><b>Death: </b>' + pin.properties.covid.deaths + '</p><p><b>Last Update: </b>' + moment(pin.properties.covid.lastUpdate).format('L') + '</p>') 
    : null );
 
                 var geoJson = L.geoJson(props.pins, {
