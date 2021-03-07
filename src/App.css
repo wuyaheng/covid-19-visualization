@@ -80,14 +80,18 @@ body {
   p {
     padding: 0rem;
     margin: 0rem;
+    text-align: center !important;
   }
 
   h6 {
     text-align: center !important;
-    padding: 0rem;
     color: black !important;
   }
 
+hr {
+  padding: 0rem !important;
+  margin: 0rem 0rem 0.5rem 0rem !important;
+}
 .ag-body-horizontal-scroll-viewport {
     overflow-x: none !important;
 }
