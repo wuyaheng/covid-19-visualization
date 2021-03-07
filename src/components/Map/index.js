@@ -96,7 +96,7 @@ export default (props) => {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed:</b> " + numberWithCommas(feature?.properties?.covid?.confirmed) + "</p><p><b>Deaths: </b>" + numberWithCommas(feature?.properties?.covid?.deaths) + "</p><p><b>Last Update: </b>" + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</p>");
+                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(feature?.properties?.covid?.confirmed) + "</b></p><p><b>Deaths: " + numberWithCommas(feature?.properties?.covid?.deaths) + "</b></p><p><b>Last Update: " + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</b></p>");
                 }
                 }).addTo(confirmMap);
     }
