@@ -66,6 +66,12 @@ export default (props) => {
     }
 
 
+    function numberWithCommas(x) {
+      if (x !== undefined) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+  }
+
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
                     return {
@@ -90,7 +96,7 @@ export default (props) => {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.bindTooltip("<p><b>" + feature.properties.ADMIN + "</b></p><p><b>Confirmed:</b> " + feature?.properties?.covid?.confirmed + "</p><p><b>Deaths: </b>" + feature?.properties?.covid?.deaths + "</p><p><b>Last Update: </b>" + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</p>");
+                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6><p><b>Confirmed:</b> " + numberWithCommas(feature?.properties?.covid?.confirmed) + "</p><p><b>Deaths: </b>" + numberWithCommas(feature?.properties?.covid?.deaths) + "</p><p><b>Last Update: </b>" + moment(feature?.properties?.covid?.lastUpdate).format('L') + "</p>");
                 }
                 }).addTo(confirmMap);
     }

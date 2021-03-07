@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 body {
     padding: 0;
     margin: 0;
@@ -67,16 +65,6 @@ body {
     outline: none !important;
   }
 
-  .numberOfSchools {
-    font-weight: 650;
-    color: #455a64;
-  }
-
-  h6 {
-    color: #455a64 !important;
-    font-family: 'Poppins', sans-serif;
-  }
-
   .leaflet-tooltip{
     width: 160px !important;
     white-space: normal !important; 
@@ -85,6 +73,13 @@ body {
   p {
     padding: 0rem;
     margin: 0rem;
+  }
+
+  h6 {
+    text-align: center !important;
+    padding: 0rem;
+    margin: 0rem;
+    color: black !important;
   }
 
 .ag-body-horizontal-scroll-viewport {
