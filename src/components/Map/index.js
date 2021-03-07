@@ -49,8 +49,19 @@ export default (props) => {
       MAP_ID.setAttribute("id", "mapid");
       MAP_CONTAINER2.appendChild(MAP_ID);
 
+      // Initialize all of the LayerGroups we'll be using
+      var layers = {
+        ConfirmCases: new L.LayerGroup(),
+        DeathCases: new L.LayerGroup()
+      };
 
-      let confirmMap = L.map("mapid").setView([props.lat, props.lon], 2)
+      const confirmMap = L.map("mapid", {
+        layers: [
+          layers.ConfirmCases,
+          layers.DeathCases,
+        ]
+      }).setView([props.lat, props.lon], 2);
+
       
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -64,6 +75,16 @@ export default (props) => {
           accessToken: process.env.REACT_APP_MAP_API_KEY,
         }
       ).addTo(confirmMap);
+
+      // Create an overlays object to add to the layer control
+      var overlays = {
+        "Confirm Cases": layers.ConfirmCases, 
+        "Death Cases": layers.DeathCases
+      }; 
+
+      // Create a control for our layers, add our overlay layers to it
+      L.control.layers(null, overlays).addTo(confirmMap);
+
 
 
                 var geoJson = L.geoJson(props.pins, {
@@ -90,9 +111,39 @@ export default (props) => {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p>"); 
+                    layer.addTo(layers.ConfirmCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p>"); 
                 }
                 }).addTo(confirmMap);
+
+
+
+                var geoJson = L.geoJson(props.pins, {
+                  style: function(feature) {
+                      return {
+                      color: "white",
+                      fillColor: chooseColor(feature?.properties?.covid?.deaths),
+                      fillOpacity: 0.7,
+                      weight: 1.5
+                      };
+                  },
+                  onEachFeature: function(feature, layer) {
+                      layer.on({
+                      mouseover: function(event) {
+                          layer = event.target;
+                          layer.setStyle({
+                          fillOpacity: 0.9
+                          });
+                      },
+                      mouseout: function(event) {
+                          geoJson.resetStyle(event.target);
+                      },
+                      click: function(event) {
+                        confirmMap.fitBounds(event.target.getBounds()); 
+                      }
+                      });
+                      layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
+                  }
+                  }).addTo(confirmMap);
     }
 
     return () => (MAP_CONTAINER2.innerHTML = "");
