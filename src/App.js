@@ -61,8 +61,6 @@ class App extends Component {
       return dict;
     },{})
 
-    console.log(condensedData)
-
     const updatedGeoData = data.geoData.map((item) => {
       const iso3 = item.properties.ISO_A3;
       const countryData = condensedData[iso3];

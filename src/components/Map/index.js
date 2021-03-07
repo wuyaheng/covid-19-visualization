@@ -33,7 +33,8 @@ export default (props) => {
 
       props.pins.forEach((pin) =>
       (pin?.properties?.covid?.lat && pin?.properties?.covid?.long) ? 
-      L.marker([pin.properties.covid.lat, pin.properties.covid.long]).addTo(confirmMap).bindTooltip('<b>' + fixUndefined(pin.properties.covid.recovered) + '</b><p><b>Confirmed:</b> ' + fixUndefined(pin.properties.covid.confirmed) + '</p>') 
+      L.marker([pin.properties.covid.lat, pin.properties.covid.long]).addTo(confirmMap).bindTooltip('<p><b>' + pin.properties.ADMIN + 
+      '</b></p><p><b>Recovered: </b>' + pin.properties.covid.recovered + '</p><p><b>Confirmed:</b> ' + pin.properties.covid.confirmed + '</p>') 
    : null );
 
                 var geoJson = L.geoJson(props.pins, {

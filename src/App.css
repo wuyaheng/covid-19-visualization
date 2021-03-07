@@ -78,7 +78,7 @@ body {
   }
 
   .leaflet-tooltip{
-    width: 300px !important;
+    width: 150px !important;
     white-space: normal !important; 
   }
 
@@ -86,9 +86,6 @@ body {
     padding: 0rem;
     margin: 0rem;
   }
-
-
-
 
 .ag-body-horizontal-scroll-viewport {
     overflow-x: none !important;
