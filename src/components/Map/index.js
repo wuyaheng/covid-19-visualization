@@ -6,9 +6,45 @@ import moment from 'moment'
 
 export default (props) => {
   React.useEffect(() => {
+
+    var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
+
+    function chooseColor(x) {
+      if (x > 20000000) {
+        return "#3B0000"
+      } else if (x > 10000000) {
+        return "#4F1818"
+      } else if (x >= 5000000) {
+        return "#681A1A"
+      } else if (x >= 2500000) {
+        return "#87101a"
+      } else if (x >= 1000000) {
+        return "#a31420";
+      } else if (x >= 100000) {
+        return "#bc5059";
+      } else if (x >= 10000) {
+        return "#BD777A";
+      } else if (x >= 1000) {
+        return "#D0979A";
+      } else if (x >= 500) {
+        return "#E3B7BA";
+      } else if (x >= 100) {
+        return "#FFE6EA"
+      } else {
+        return "white"
+      }
+  }
+
+  function numberWithCommas(x) {
+    if (x !== undefined) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } 
+}
+
     const MAP_CONTAINER2 = document.getElementById("map-container2");
 
     if (props.lat && props.lon && props.pins) {
+
       const MAP_ID = document.createElement("div");
       MAP_ID.setAttribute("id", "mapid");
       MAP_CONTAINER2.appendChild(MAP_ID);
@@ -29,42 +65,6 @@ export default (props) => {
         }
       ).addTo(confirmMap);
 
-
-        var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
-
-
-      function chooseColor(x) {
-        if (x > 20000000) {
-          return "#3B0000"
-        } else if (x > 10000000) {
-          return "#4F1818"
-        } else if (x >= 5000000) {
-          return "#681A1A"
-        } else if (x >= 2500000) {
-          return "#87101a"
-        } else if (x >= 1000000) {
-          return "#a31420";
-        } else if (x >= 100000) {
-          return "#bc5059";
-        } else if (x >= 10000) {
-          return "#BD777A";
-        } else if (x >= 1000) {
-          return "#D0979A";
-        } else if (x >= 500) {
-          return "#E3B7BA";
-        } else if (x >= 100) {
-          return "#FFE6EA"
-        } else {
-          return "white"
-        }
-    }
-
-
-    function numberWithCommas(x) {
-      if (x !== undefined) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      } 
-  }
 
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
