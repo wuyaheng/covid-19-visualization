@@ -29,7 +29,7 @@ export default (props) => {
       } else if (x >= 500) {
         return "#E3B7BA";
       } else {
-        return "grey"
+        return "white"
       }
   }
 
@@ -50,13 +50,15 @@ export default (props) => {
       // Initialize all of the LayerGroups we'll be using
       var layers = {
         ConfirmCases: new L.LayerGroup(),
-        DeathCases: new L.LayerGroup()
+        DeathCases: new L.LayerGroup(),
+        RecoverCases: new L.LayerGroup()
       };
 
       const confirmMap = L.map("mapid", {
         layers: [
           layers.ConfirmCases,
           layers.DeathCases,
+          layers.RecoverCases
         ]
       }).setView([props.lat, props.lon], 2);
 
@@ -77,7 +79,8 @@ export default (props) => {
       // Create an overlays object to add to the layer control
       var overlays = {
         "Confirm Cases": layers.ConfirmCases, 
-        "Death Cases": layers.DeathCases
+        "Death Cases": layers.DeathCases,
+        "Recover Cases": layers.RecoverCases
       }; 
 
       // Create a control for our layers, add our overlay layers to it
@@ -163,6 +166,34 @@ export default (props) => {
                       layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
                   }
                   }).addTo(confirmMap);
+
+                  var geoJson = L.geoJson(props.pins, {
+                    style: function(feature) {
+                        return {
+                        color: "white",
+                        fillColor: chooseColor(feature?.properties?.covid?.recovered),
+                        fillOpacity: 0.7,
+                        weight: 1.5
+                        };
+                    },
+                    onEachFeature: function(feature, layer) {
+                        layer.on({
+                        mouseover: function(event) {
+                            layer = event.target;
+                            layer.setStyle({
+                            fillOpacity: 0.9
+                            });
+                        },
+                        mouseout: function(event) {
+                            geoJson.resetStyle(event.target);
+                        },
+                        click: function(event) {
+                          confirmMap.fitBounds(event.target.getBounds()); 
+                        }
+                        });
+                        layer.addTo(layers.RecoverCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Recover: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.recovered)) + "</b></p>"); 
+                    }
+                    }).addTo(confirmMap);
     }
 
     return () => (MAP_CONTAINER2.innerHTML = "");
