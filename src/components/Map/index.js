@@ -97,6 +97,26 @@ function chooseDeathColor(d) {
 
       L.control.layers(overlays, null).addTo(confirmMap);
 
+      var legend = L.control({position: 'bottomleft'});
+
+      legend.onAdd = function (map) {
+
+          var div = L.DomUtil.create('div', 'info legend'),
+              grades = [0, 100, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000],
+              labels = [];
+              div.innerHTML += "<p class='legendLabel'><b>Recover Cases</b></p>"
+          // loop through our density intervals and generate a label with a colored square for each interval
+          for (var i = 0; i < grades.length; i++) {
+              div.innerHTML +=
+                  '<i style="background:' + chooseRecoverColor(grades[i] + 1) + '"></i> ' +
+                  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+          }
+
+          return div;
+      };
+
+      legend.addTo(confirmMap);
+
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
                     return {
