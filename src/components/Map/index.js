@@ -9,28 +9,17 @@ export default (props) => {
 
     var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
 
-    function chooseColor(x) {
-      if (x > 20000000) {
-        return "#3B0000"
-      } else if (x > 10000000) {
-        return "#4F1818"
-      } else if (x >= 5000000) {
-        return "#681A1A"
-      } else if (x >= 2500000) {
-        return "#87101a"
-      } else if (x >= 1000000) {
-        return "#a31420";
-      } else if (x >= 100000) {
-        return "#bc5059";
-      } else if (x >= 10000) {
-        return "#BD777A";
-      } else if (x >= 1000) {
-        return "#D0979A";
-      } else if (x >= 500) {
-        return "#E3B7BA";
-      } else {
-        return "white"
-      }
+    function chooseColor(d) {
+      return d > 20000000 ? '#3B0000' :
+            d > 10000000  ? '#4F1818' :
+            d > 5000000   ? '#681A1A' :
+            d > 2500000   ? '#87101a' :
+            d > 1000000   ? '#a31420' :
+            d > 100000    ? '#bc5059' :
+            d > 10000     ? '#BD777A' :
+            d > 1000      ? '#D0979A' :
+            d > 500       ? '#E3B7BA' :
+                            'white';
   }
 
   function numberWithCommas(x) {
