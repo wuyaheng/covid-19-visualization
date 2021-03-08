@@ -98,25 +98,72 @@ function chooseDeathColor(d) {
       L.control.layers(baseMaps, null).addTo(confirmMap);
 
 
-      var RecoverLegend = L.control({position: 'bottomleft'});
-
+      var RecoverLegend = L.control();
       RecoverLegend.onAdd = function () {
-
           let Recoverdiv = L.DomUtil.create('div', 'info legend'),
               recoverGrades = [0, 100, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000];
-
               Recoverdiv.innerHTML += "<p class='legendLabel'><b>Recover Cases</b></p>"
           for (var i = 0; i < recoverGrades.length; i++) {
                 Recoverdiv.innerHTML +=
                   '<i style="background:' + chooseRecoverColor(recoverGrades[i] + 1) + '"></i> ' +
                   recoverGrades[i] + (recoverGrades[i + 1] ? '&ndash;' + recoverGrades[i + 1] + '<br>' : '+');
           }
-
           return Recoverdiv;
       };
 
-      RecoverLegend.addTo(confirmMap);
 
+      var ConfirmLegend = L.control();
+      ConfirmLegend.onAdd = function () {
+        let Confirmdiv = L.DomUtil.create('div', 'info legend'),
+            confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
+            Confirmdiv.innerHTML += "<p class='legendLabel'><b>Recover Cases</b></p>"
+        for (var i = 0; i < confirmGrades.length; i++) {
+              Confirmdiv.innerHTML +=
+                '<i style="background:' + chooseConfirmColor(confirmGrades[i] + 1) + '"></i> ' +
+                confirmGrades[i] + (confirmGrades[i + 1] ? '&ndash;' + confirmGrades[i + 1] + '<br>' : '+');
+        }
+        return Confirmdiv;
+    };
+
+    var DeathLegend = L.control();
+    DeathLegend.onAdd = function () {
+      let Deathdiv = L.DomUtil.create('div', 'info legend'),
+          deathGrades = [0, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000];
+          Deathdiv.innerHTML += "<p class='legendLabel'><b>Recover Cases</b></p>"
+      for (var i = 0; i < deathGrades.length; i++) {
+            Deathdiv.innerHTML +=
+              '<i style="background:' + chooseDeathColor(deathGrades[i] + 1) + '"></i> ' +
+              deathGrades[i] + (deathGrades[i + 1] ? '&ndash;' + deathGrades[i + 1] + '<br>' : '+');
+      }
+      return Deathdiv;
+  };
+
+
+  
+  RecoverLegend.addTo(confirmMap);
+  var currentLegend = RecoverLegend;
+
+
+  confirmMap.on('baselayerchange', function (eventLayer) {
+    console.log(eventLayer.name)
+    if (eventLayer.name === 'Recover Cases') {
+      confirmMap.removeControl(currentLegend);
+        currentLegend = RecoverLegend;
+        RecoverLegend.addTo(confirmMap);
+    }
+    else if  (eventLayer.name === 'Confirm Cases') {
+      confirmMap.removeControl(currentLegend);
+        currentLegend = ConfirmLegend;
+        ConfirmLegend.addTo(confirmMap);
+    }
+    else if  (eventLayer.name === 'Death Cases') {
+      confirmMap.removeControl(currentLegend);
+        currentLegend = DeathLegend;
+        DeathLegend.addTo(confirmMap);
+    }
+  })
+
+  
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
                     return {
