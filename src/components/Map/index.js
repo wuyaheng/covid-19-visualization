@@ -9,18 +9,46 @@ export default (props) => {
 
     var fixUndefined = (item) => (typeof (item) == 'undefined' ? 'Unknown' : item); 
 
-    function chooseColor(d) {
-      return d > 20000000 ? '#3B0000' :
-            d > 10000000  ? '#4F1818' :
-            d > 5000000   ? '#681A1A' :
-            d > 2500000   ? '#87101a' :
-            d > 1000000   ? '#a31420' :
-            d > 100000    ? '#bc5059' :
-            d > 10000     ? '#BD777A' :
-            d > 1000      ? '#D0979A' :
-            d > 500       ? '#E3B7BA' :
+    function chooseConfirmColor(d) {
+      return d > 20000000 ? '#7f0000' :
+            d > 10000000  ? '#b30000' :
+            d > 5000000   ? '#d7301f' :
+            d > 2500000   ? '#ef6548' :
+            d > 1000000   ? '#fc8d59' :
+            d > 100000    ? '#fdbb84' :
+            d > 10000     ? '#fdd49e' :
+            d > 1000      ? '#fee8c8' :
+            d > 500       ? '#fff7ec' :
                             'white';
   }
+
+
+  function chooseRecoverColor(d) {
+    return d > 10000000 ? '#00441b' :
+          d > 5000000   ? '#006d2c' :
+          d > 2500000   ? '#238b45' :
+          d > 1000000   ? '#41ae76' :
+          d > 100000    ? '#66c2a4' :
+          d > 10000     ? '#99d8c9' :
+          d > 1000      ? '#ccece6' :
+          d > 500       ? '#e5f5f9' :
+          d > 100       ? '#f7fcfd' :
+                          'white';
+}
+
+
+function chooseDeathColor(d) {
+  return d > 500000 ? '#000000' :
+         d > 250000 ? '#252525' :
+         d > 100000 ? '#525252' :
+         d > 50000  ? '#737373' :
+         d > 25000  ? '#969696' :
+         d > 10000  ? '#bdbdbd' :
+         d > 5000   ? '#d9d9d9' :
+         d > 1000   ? '#e7e7e7' :
+         d > 500    ? '#f3f3f3' :
+                      'white';
+}
 
   function numberWithCommas(x) {
     if (x !== undefined) {
@@ -97,7 +125,7 @@ export default (props) => {
                 style: function(feature) {
                     return {
                     color: "white",
-                    fillColor: chooseColor(feature?.properties?.covid?.confirmed),
+                    fillColor: chooseConfirmColor(feature?.properties?.covid?.confirmed),
                     fillOpacity: 0.7,
                     weight: 1.5
                     };
@@ -127,7 +155,7 @@ export default (props) => {
                   style: function(feature) {
                       return {
                       color: "white",
-                      fillColor: chooseColor(feature?.properties?.covid?.deaths),
+                      fillColor: chooseDeathColor(feature?.properties?.covid?.deaths), 
                       fillOpacity: 0.7,
                       weight: 1.5
                       };
@@ -155,7 +183,7 @@ export default (props) => {
                     style: function(feature) {
                         return {
                         color: "white",
-                        fillColor: chooseColor(feature?.properties?.covid?.recovered),
+                        fillColor: chooseRecoverColor(feature?.properties?.covid?.recovered),
                         fillOpacity: 0.7,
                         weight: 1.5
                         };
