@@ -84,7 +84,7 @@ export default (props) => {
       }; 
 
       // Create a control for our layers, add our overlay layers to it
-      L.control.layers(null, overlays).addTo(confirmMap);
+      L.control.layers(overlays).addTo(confirmMap);
 
             // var info = L.control({
             //   position: "bottomright"
