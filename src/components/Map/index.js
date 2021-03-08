@@ -95,7 +95,7 @@ function chooseDeathColor(d) {
         "Death Cases": layers.DeathCases
       }; 
 
-      L.control.layers(baseMaps, null).addTo(confirmMap);
+      L.control.layers(baseMaps, null,{collapsed:false}).addTo(confirmMap);
 
 
       var RecoverLegend = L.control({position: "bottomleft"});
