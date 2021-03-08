@@ -64,7 +64,6 @@ function chooseDeathColor(d) {
       MAP_ID.setAttribute("id", "mapid");
       MAP_CONTAINER2.appendChild(MAP_ID);
 
-      // Initialize all of the LayerGroups we'll be using
       var layers = {
         RecoverCases: new L.LayerGroup(),
         ConfirmCases: new L.LayerGroup(),
@@ -90,36 +89,13 @@ function chooseDeathColor(d) {
         }
       ).addTo(confirmMap);
 
-      // Create an overlays object to add to the layer control
       var overlays = {
         "Recover Cases": layers.RecoverCases,
         "Confirm Cases": layers.ConfirmCases, 
         "Death Cases": layers.DeathCases
       }; 
 
-      // Create a control for our layers, add our overlay layers to it
       L.control.layers(overlays, null).addTo(confirmMap);
-
-            // var info = L.control({
-            //   position: "bottomright"
-            // });
-      
-            // info.onAdd = function() {
-            //   var div = L.DomUtil.create("div", "legend");
-            //   div.innerHTML += "<span class='dot first'></span>0 - 500<br/>"; 
-            //   div.innerHTML += "<span class='dot second'></span>500 - 1000<br/>"; 
-            //   div.innerHTML += "<span class='dot third'></span>1000 - 10000<br/>";
-            //   div.innerHTML += "<span class='dot four'></span>10000 - 100000<br/>";  
-            //   div.innerHTML += "<span class='dot five'></span>100000 - 1000000<br/>"; 
-            //   div.innerHTML += "<span class='dot six'></span>1000000 - 2500000<br/>"; 
-            //   div.innerHTML += "<span class='dot seven'></span>2500000 - 5000000<br/>"; 
-            //   div.innerHTML += "<span class='dot eight'></span>5000000 - 10000000<br/>"; 
-            //   div.innerHTML += "<span class='dot nine'></span>10000000 - 20000000<br/>"; 
-            //   div.innerHTML += "<span class='dot ten'></span>20000000 + <br/>"; 
-            //   return div;
-            // }; 
-    
-            // info.addTo(confirmMap);
 
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
@@ -132,14 +108,15 @@ function chooseDeathColor(d) {
                 },
                 onEachFeature: function(feature, layer) {
                     layer.on({
-                    mouseover: function(event) {
-                        layer = event.target;
-                        layer.setStyle({
+                    mouseover: function() {
+                      this.setStyle({
                         fillOpacity: 0.9
                         });
                     },
                     mouseout: function(event) {
-                        geoJson.resetStyle(event.target);
+                      this.setStyle({
+                        fillOpacity: 0.7
+                      })
                     },
                     click: function(event) {
                       confirmMap.fitBounds(event.target.getBounds()); 
@@ -162,14 +139,15 @@ function chooseDeathColor(d) {
                   },
                   onEachFeature: function(feature, layer) {
                       layer.on({
-                      mouseover: function(event) {
-                          layer = event.target;
-                          layer.setStyle({
+                      mouseover: function() {
+                          this.setStyle({
                           fillOpacity: 0.9
                           });
                       },
-                      mouseout: function(event) {
-                          geoJson.resetStyle(event.target);
+                      mouseout: function() {
+                          this.setStyle({
+                            fillOpacity: 0.7
+                          })
                       },
                       click: function(event) {
                         confirmMap.fitBounds(event.target.getBounds()); 
@@ -190,14 +168,15 @@ function chooseDeathColor(d) {
                     },
                     onEachFeature: function(feature, layer) {
                         layer.on({
-                        mouseover: function(event) {
-                            layer = event.target;
-                            layer.setStyle({
+                        mouseover: function() {
+                          this.setStyle({
                             fillOpacity: 0.9
                             });
                         },
-                        mouseout: function(event) {
-                            geoJson.resetStyle(event.target);
+                        mouseout: function() {
+                          this.setStyle({
+                            fillOpacity: 0.7
+                          })
                         },
                         click: function(event) {
                           confirmMap.fitBounds(event.target.getBounds()); 
