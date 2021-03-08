@@ -13,10 +13,12 @@ body {
 }
   #map-container {
     height: 550px;
+    border-radius: 5px;
   }
 
   #mapid {
     height: 550px;
+    border-radius: 5px;
   }
   
   .leaflet-popup-content {
@@ -126,4 +128,10 @@ canvas {
 
 .legendLabel {
   text-align: left !important;
+}
+
+
+.card {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
