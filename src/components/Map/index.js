@@ -98,7 +98,7 @@ function chooseDeathColor(d) {
       L.control.layers(baseMaps, null).addTo(confirmMap);
 
 
-      var RecoverLegend = L.control();
+      var RecoverLegend = L.control({position: "bottomleft"});
       RecoverLegend.onAdd = function () {
           let Recoverdiv = L.DomUtil.create('div', 'info legend'),
               recoverGrades = [0, 100, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000];
@@ -112,7 +112,7 @@ function chooseDeathColor(d) {
       };
 
 
-      var ConfirmLegend = L.control();
+      var ConfirmLegend = L.control({position: "bottomleft"});
       ConfirmLegend.onAdd = function () {
         let Confirmdiv = L.DomUtil.create('div', 'info legend'),
             confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
@@ -125,7 +125,7 @@ function chooseDeathColor(d) {
         return Confirmdiv;
     };
 
-    var DeathLegend = L.control();
+    var DeathLegend = L.control({position: "bottomleft"});
     DeathLegend.onAdd = function () {
       let Deathdiv = L.DomUtil.create('div', 'info legend'),
           deathGrades = [0, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000];
@@ -163,7 +163,7 @@ function chooseDeathColor(d) {
     }
   })
 
-  
+
                 var geoJson = L.geoJson(props.pins, {
                 style: function(feature) {
                     return {
