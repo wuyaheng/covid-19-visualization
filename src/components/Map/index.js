@@ -56,13 +56,10 @@ export default (props) => {
 
       const confirmMap = L.map("mapid", {
         layers: [
-          layers.ConfirmCases,
-          layers.DeathCases,
           layers.RecoverCases
         ]
       }).setView([props.lat, props.lon], 2);
-
-      
+   
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
@@ -84,7 +81,7 @@ export default (props) => {
       }; 
 
       // Create a control for our layers, add our overlay layers to it
-      L.control.layers(overlays).addTo(confirmMap);
+      L.control.layers(overlays, null).addTo(confirmMap);
 
             // var info = L.control({
             //   position: "bottomright"
@@ -133,7 +130,7 @@ export default (props) => {
                     });
                     layer.addTo(layers.ConfirmCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p>"); 
                 }
-                }).addTo(confirmMap);
+                })
 
 
 
@@ -163,7 +160,7 @@ export default (props) => {
                       });
                       layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
                   }
-                  }).addTo(confirmMap);
+                  })
 
                   var geoJson = L.geoJson(props.pins, {
                     style: function(feature) {
