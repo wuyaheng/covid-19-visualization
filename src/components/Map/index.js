@@ -49,9 +49,9 @@ export default (props) => {
 
       // Initialize all of the LayerGroups we'll be using
       var layers = {
+        RecoverCases: new L.LayerGroup(),
         ConfirmCases: new L.LayerGroup(),
-        DeathCases: new L.LayerGroup(),
-        RecoverCases: new L.LayerGroup()
+        DeathCases: new L.LayerGroup()
       };
 
       const confirmMap = L.map("mapid", {
@@ -75,9 +75,9 @@ export default (props) => {
 
       // Create an overlays object to add to the layer control
       var overlays = {
+        "Recover Cases": layers.RecoverCases,
         "Confirm Cases": layers.ConfirmCases, 
-        "Death Cases": layers.DeathCases,
-        "Recover Cases": layers.RecoverCases
+        "Death Cases": layers.DeathCases
       }; 
 
       // Create a control for our layers, add our overlay layers to it
