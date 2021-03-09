@@ -99,9 +99,17 @@ hr {
     overflow-x: none !important;
 }
 
-/* canvas {
-  height: 325px !important;
-} */
+canvas {
+  margin: 0rem !important;
+  padding: 0rem !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.lineChartCard {
+  height: 360px !important;
+  margin-bottom: 2rem !important;
+}
 
 
 @media only screen and (max-width: 768px) {

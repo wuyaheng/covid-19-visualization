@@ -6,18 +6,17 @@ const Chart = (props) => {
 
     const BarChart = () => {
         const colorArray = [
-            "#238b45",
-            "#d7301f",
-            "#525252"
+            "#66c2a4",
+            "#fc8d59",
+            "#969696"
           ];
     
         let options = {
-          aspectRatio: 1,
           legend: {
             display: false
           },
-          responsive: false,
-          maintainAspectRatio: true,
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             labels: {
               render: 'value',
@@ -32,7 +31,8 @@ const Chart = (props) => {
             }
           },
           title: {
-            display: false
+            display: true,
+            fontSize: 18
          },
           scales: {
             xAxes: [
@@ -47,12 +47,14 @@ const Chart = (props) => {
             ],
             yAxes: [{
               ticks: {
-                display: false,
-                maxRotation: 45,
-                minRotation: 45
+                display: true,
+                callback(value) {
+                    // you can add your own method here (just an example)
+                    return Number(value).toLocaleString('en')
+                  }
               },
               gridLines: {
-                display: false
+                display: true
               }
           }]
           }
@@ -70,17 +72,17 @@ const Chart = (props) => {
                 ],
               }}
               options={options} 
-              height={350}
-              width={450}
             />
           );
     
       };
 
     return (
-        <>
+
+        <div class="card lineChartCard">
          <BarChart />
-        </>
+         </div>
+
     )
 }
 export default Chart;
