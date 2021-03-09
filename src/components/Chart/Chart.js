@@ -6,9 +6,9 @@ const Chart = (props) => {
 
     const BarChart = () => {
         const colorArray = [
-            "#66c2a4",
-            "#fc8d59",
-            "#969696"
+            "rgba(102, 194, 164, 0.8)",
+            "rgba(252, 141, 89, 0.8)",
+            "rgba(150, 150, 150, 0.8)"
           ];
     
         let options = {

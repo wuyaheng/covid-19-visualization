@@ -7,15 +7,15 @@
 }
 
 .confirmed {
-    border-bottom: 10px solid #fc8d59;
+    border-bottom: 10px solid rgba(252, 141, 89, 0.8);
 }
 
 .recovered {
-    border-bottom: 10px solid #66c2a4;
+    border-bottom: 10px solid rgba(102, 194, 164, 0.8);
 }
 
 .deaths {
-    border-bottom: 10px solid #969696;
+    border-bottom: 10px solid rgba(150, 150, 150, 0.8);
 }
 
 @media (max-width: 770px) {
