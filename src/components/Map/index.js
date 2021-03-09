@@ -90,8 +90,8 @@ function chooseDeathColor(d) {
       ).addTo(confirmMap);
 
       var baseMaps = {
-        "Recover Cases": layers.RecoverCases,
-        "Confirm Cases": layers.ConfirmCases, 
+        "Recovered Cases": layers.RecoverCases,
+        "Confirmed Cases": layers.ConfirmCases, 
         "Death Cases": layers.DeathCases
       }; 
 
@@ -102,7 +102,7 @@ function chooseDeathColor(d) {
       RecoverLegend.onAdd = function () {
           let Recoverdiv = L.DomUtil.create('div', 'info legend'),
               recoverGrades = [0, 100, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000];
-              Recoverdiv.innerHTML += "<p class='legendLabel'><b>Recover Cases</b></p>"
+              Recoverdiv.innerHTML += "<p class='legendLabel'><b>Recovered Cases</b></p>"
           for (var i = 0; i < recoverGrades.length; i++) {
                 Recoverdiv.innerHTML +=
                   '<i style="background:' + chooseRecoverColor(recoverGrades[i] + 1) + '"></i> ' +
@@ -116,7 +116,7 @@ function chooseDeathColor(d) {
       ConfirmLegend.onAdd = function () {
         let Confirmdiv = L.DomUtil.create('div', 'info legend'),
             confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
-            Confirmdiv.innerHTML += "<p class='legendLabel'><b>Confirm Cases</b></p>"
+            Confirmdiv.innerHTML += "<p class='legendLabel'><b>Confirmed Cases</b></p>"
         for (var i = 0; i < confirmGrades.length; i++) {
               Confirmdiv.innerHTML +=
                 '<i style="background:' + chooseConfirmColor(confirmGrades[i] + 1) + '"></i> ' +
@@ -146,12 +146,12 @@ function chooseDeathColor(d) {
 
   confirmMap.on('baselayerchange', function (eventLayer) {
     console.log(eventLayer.name)
-    if (eventLayer.name === 'Recover Cases') {
+    if (eventLayer.name === 'Recovered Cases') {
       confirmMap.removeControl(currentLegend);
         currentLegend = RecoverLegend;
         RecoverLegend.addTo(confirmMap);
     }
-    else if  (eventLayer.name === 'Confirm Cases') {
+    else if  (eventLayer.name === 'Confirmed Cases') {
       confirmMap.removeControl(currentLegend);
         currentLegend = ConfirmLegend;
         ConfirmLegend.addTo(confirmMap);
