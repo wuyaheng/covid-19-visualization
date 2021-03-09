@@ -4,12 +4,12 @@ body {
   }
   
   nav {
-    background-color: #455a64 !important;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background-color: #fff !important;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);
   }
 
 .navbar-brand {
-  color: white !important;
+  color: #212529 !important;
   margin: 0 auto !important;
 }
   #map-container {

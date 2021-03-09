@@ -93,9 +93,9 @@ class App extends Component {
         <>
           <nav className="navbar navbar-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <p className="navbar-brand">
             Covid-19 Visualization
-          </a>
+          </p>
         </div>
       </nav>
         <div className="container-fluid mt-3">
