@@ -99,9 +99,9 @@ hr {
     overflow-x: none !important;
 }
 
-canvas {
+/* canvas {
   height: 325px !important;
-}
+} */
 
 
 @media only screen and (max-width: 768px) {
