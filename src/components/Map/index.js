@@ -259,4 +259,3 @@ function chooseDeathColor(d) {
 
   return <div id="map-container2"></div>;
 };
-

@@ -11,16 +11,6 @@ const Cards = ({newdata: { confirmed, recovered, deaths }}) => {
     return (
         <div className = {styles.container}>
             <Grid container spacine={3} justify="center">
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.confirmed)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Confirmed</Typography>
-                        <Typography variant="p"><CountUp
-                        start={0}
-                        end={confirmed.value}
-                        duration={2.5}
-                        separator=","/> </Typography> 
-                    </CardContent>
-                </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Recovered</Typography>
@@ -29,6 +19,16 @@ const Cards = ({newdata: { confirmed, recovered, deaths }}) => {
                         end={recovered.value}
                         duration={2.5}
                         separator=","/> </Typography>
+                    </CardContent>
+                </Grid>
+                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.confirmed)}>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>Confirmed</Typography>
+                        <Typography variant="p"><CountUp
+                        start={0}
+                        end={confirmed.value}
+                        duration={2.5}
+                        separator=","/> </Typography> 
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
