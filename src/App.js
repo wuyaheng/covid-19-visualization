@@ -106,7 +106,7 @@ class App extends Component {
       <Chart newdata={newdata} newcountry={newcountry}/>
 
         </div>
-        <div className="col-md-8 mb-4">
+        <div className="col-md-8 mb-3">
         <div className="card">
           <MapBox results = {updatedGeoData}/>
           </div>

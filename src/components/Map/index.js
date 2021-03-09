@@ -102,7 +102,7 @@ function chooseDeathColor(d) {
       RecoverLegend.onAdd = function () {
           let Recoverdiv = L.DomUtil.create('div', 'info legend'),
               recoverGrades = [0, 100, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000];
-              Recoverdiv.innerHTML += "<p class='legendLabel'><b>Recovered Cases</b></p>"
+              Recoverdiv.innerHTML += "<p class='legendLabel'>Recovered Cases</p>"
           for (var i = 0; i < recoverGrades.length; i++) {
                 Recoverdiv.innerHTML +=
                   '<i style="background:' + chooseRecoverColor(recoverGrades[i] + 1) + '"></i> ' +
@@ -116,7 +116,7 @@ function chooseDeathColor(d) {
       ConfirmLegend.onAdd = function () {
         let Confirmdiv = L.DomUtil.create('div', 'info legend'),
             confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
-            Confirmdiv.innerHTML += "<p class='legendLabel'><b>Confirmed Cases</b></p>"
+            Confirmdiv.innerHTML += "<p class='legendLabel'>Confirmed Cases</p>"
         for (var i = 0; i < confirmGrades.length; i++) {
               Confirmdiv.innerHTML +=
                 '<i style="background:' + chooseConfirmColor(confirmGrades[i] + 1) + '"></i> ' +
@@ -129,7 +129,7 @@ function chooseDeathColor(d) {
     DeathLegend.onAdd = function () {
       let Deathdiv = L.DomUtil.create('div', 'info legend'),
           deathGrades = [0, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000];
-          Deathdiv.innerHTML += "<p class='legendLabel'><b>Death Cases</b></p>"
+          Deathdiv.innerHTML += "<p class='legendLabel'>Death Cases</p>"
       for (var i = 0; i < deathGrades.length; i++) {
             Deathdiv.innerHTML +=
               '<i style="background:' + chooseDeathColor(deathGrades[i] + 1) + '"></i> ' +

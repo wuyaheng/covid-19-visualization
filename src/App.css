@@ -9,7 +9,7 @@ body {
   }
 
 .navbar-brand {
-  color: #212529 !important;
+  color: #555555 !important;
   margin: 0 auto !important;
 }
   #map-container {
@@ -107,8 +107,8 @@ canvas {
 }
 
 .lineChartCard {
-  height: 360px !important;
-  margin-bottom: 2rem !important;
+  height: 390px !important;
+  margin-bottom: 1rem !important;
 }
 
 
@@ -137,6 +137,8 @@ canvas {
 
 .legendLabel {
   text-align: left !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
 }
 
 
