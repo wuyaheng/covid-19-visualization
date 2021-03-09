@@ -22,7 +22,7 @@ class App extends Component {
 
   async componentDidMount() {
     const fetchedData = await fetchData();
-    this.setState({data: fetchedData});
+    this.setState({newdata: fetchedData});
     this.fetchdata()
     this.fetchConfirm()
   }

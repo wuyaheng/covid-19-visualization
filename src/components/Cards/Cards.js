@@ -5,7 +5,7 @@ import styles from './Cards.module.css';
 import cx from 'classnames'
 
 const Cards = ({newdata: { confirmed, recovered, deaths }}) => {
-    if (!confirmed){
+    if (!confirmed || !recovered || !deaths){
         return 'Loading...';
     }
     return (
