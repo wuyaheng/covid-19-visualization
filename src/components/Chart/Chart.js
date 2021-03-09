@@ -32,7 +32,9 @@ const Chart = (props) => {
           },
           title: {
             display: true,
-            fontSize: 18
+            fontSize: 16,
+            fontColor: "#0000008A",
+            text: props.newcountry != ''? props.newcountry + ' Covid-19 Cases': 'Global Covid-19 Cases'  
          },
           scales: {
             xAxes: [
