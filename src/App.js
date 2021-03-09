@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
+import Cards from './components/Cards/Cards';
+import Chart from './components/Chart/Chart';
+import CountryPicker from './components/CountryPicker/CountryPicker';
 import MapBox from "./components/MapBox/index";
 import geodata from "./data/countries.json";
+import { fetchData } from './API/index';
 import axios from "axios";
+
 
 const url = 'https://covid19.mathdro.id/api';
 
 class App extends Component {
   state = {
     geo: [],
-    confirm: [] 
+    confirm: [],
+    newdata: {},
+    newcountry: ''
   }
 
   componentDidMount() {
+        const fetchedData = fetchData();
+        this.setState({newdata: fetchedData});
         this.fetchdata()
         this.fetchConfirm()
+  }
+
+  handleCountryChange = async (newcountry) => {
+    const fetchedData = await fetchData(newcountry);
+    this.setState({newdata: fetchedData, newcountry: newcountry})
   }
 
   fetchdata = () => {
@@ -72,8 +86,7 @@ class App extends Component {
 
     })
 
-    console.log(updatedGeoData)
-
+    const { newdata, newcountry } = this.state;
 
       return (
         <>
@@ -86,10 +99,13 @@ class App extends Component {
       </nav>
         <div className="container-fluid mt-2">
         <div className="row mb-0">
-        <div className="col-md-3">
+        <div className="col-md-4 text-center">
+        <CountryPicker handleCountryChange={this.handleCountryChange}/>
+      <Cards newdata = {newdata} />
+      <Chart newdata={newdata} newcountry={newcountry}/>
 
         </div>
-        <div className="col-md-9">
+        <div className="col-md-8">
         <div className="card">
           <MapBox results = {updatedGeoData}/>
           </div>

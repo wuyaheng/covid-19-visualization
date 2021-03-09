@@ -136,3 +136,21 @@ canvas {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
+
+.form-select {
+  width: 84%;
+  margin: 0 auto !important;
+  box-shadow: none !important;
+  outline: none !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+select {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important; 
+}
+
+select:focus {
+  box-shadow: none !important;
+  outline: #eee !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+}
