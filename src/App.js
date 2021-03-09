@@ -19,11 +19,12 @@ class App extends Component {
     newcountry: ''
   }
 
-  componentDidMount() {
-        const fetchedData = fetchData();
-        this.setState({newdata: fetchedData});
-        this.fetchdata()
-        this.fetchConfirm()
+
+  async componentDidMount() {
+    const fetchedData = await fetchData();
+    this.setState({data: fetchedData});
+    this.fetchdata()
+    this.fetchConfirm()
   }
 
   handleCountryChange = async (newcountry) => {
