@@ -138,7 +138,7 @@ canvas {
 }
 
 .form-select {
-  width: 84%;
+  width: 100%;
   margin: 0 auto !important;
   box-shadow: none !important;
   outline: none !important;
