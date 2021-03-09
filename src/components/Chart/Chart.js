@@ -12,10 +12,11 @@ const Chart = (props) => {
           ];
     
         let options = {
+          aspectRatio: 1,
           legend: {
             display: false
           },
-          responsive: true,
+          responsive: false,
           maintainAspectRatio: true,
           plugins: {
             labels: {
@@ -46,10 +47,12 @@ const Chart = (props) => {
             ],
             yAxes: [{
               ticks: {
-                display: true
+                display: false,
+                maxRotation: 45,
+                minRotation: 45
               },
               gridLines: {
-                display: true
+                display: false
               }
           }]
           }
@@ -68,6 +71,7 @@ const Chart = (props) => {
               }}
               options={options} 
               height={350}
+              width={450}
             />
           );
     
