@@ -52,7 +52,6 @@ const Chart = (props) => {
               ticks: {
                 display: true,
                 callback(value) {
-                    // you can add your own method here (just an example)
                     return Number(value).toLocaleString('en')
                   }
               },
@@ -82,7 +81,7 @@ const Chart = (props) => {
 
     return (
 
-        <div class="card lineChartCard">
+        <div className="card lineChartCard">
          <BarChart />
          </div>
 

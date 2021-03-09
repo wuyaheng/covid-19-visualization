@@ -11,7 +11,7 @@ const CountryPicker = ({ handleCountryChange }) => {
     }, [setFetchedCountries]);
 
     return (
-        <select class="form-select" aria-label="Default select" onChange={(e) => handleCountryChange(e.target.value)}>
+        <select className="form-select" aria-label="Default select" onChange={(e) => handleCountryChange(e.target.value)}>
         <option value="">Global</option>
         {fetchedCountries.map((country, i) => <option key={i} value={country}>{country}</option>)}
         </select>

@@ -14,30 +14,30 @@ const Cards = ({newdata: { confirmed, recovered, deaths }}) => {
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Recovered</Typography>
-                        <Typography variant="p"><CountUp
+                        <Typography variant="body1"><CountUp
                         start={0}
                         end={recovered.value}
-                        duration={2.5}
+                        duration={1.5}
                         separator=","/> </Typography>
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.confirmed)}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Confirmed</Typography>
-                        <Typography variant="p"><CountUp
+                        <Typography variant="body1"><CountUp
                         start={0}
                         end={confirmed.value}
-                        duration={2.5}
+                        duration={1.5}
                         separator=","/> </Typography> 
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom>Deaths</Typography>
-                        <Typography variant="p"><CountUp
+                        <Typography variant="body1"><CountUp
                         start={0}
                         end={deaths.value}
-                        duration={2.5}
+                        duration={1.5}
                         separator=","/> </Typography>
                     </CardContent>
                 </Grid>

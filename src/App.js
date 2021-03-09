@@ -27,6 +27,7 @@ class App extends Component {
     this.fetchConfirm()
   }
 
+
   handleCountryChange = async (newcountry) => {
     const fetchedData = await fetchData(newcountry);
     this.setState({newdata: fetchedData, newcountry: newcountry})
