@@ -5,7 +5,7 @@ import Chart from './components/Chart/Chart';
 import CountryPicker from './components/CountryPicker/CountryPicker';
 import MapBox from "./components/MapBox/index";
 import geodata from "./data/countries.json";
-import { fetchData, fetchCountries } from './API/index';
+import { fetchCountryDetail, fetchCountries } from './API/index';
 import axios from "axios";
 
 
@@ -22,7 +22,7 @@ class App extends Component {
 
 
   async componentDidMount() {
-    const fetchedData = await fetchData();
+    const fetchedData = await fetchCountryDetail();
     this.setState({newdata: fetchedData});
     const fetchedCountries = await fetchCountries()
     fetchedCountries.map((aCountry) => {
@@ -36,7 +36,7 @@ class App extends Component {
 
 
   handleCountryChange = async (newcountry) => {
-    const fetchedData = await fetchData(newcountry);
+    const fetchedData = await fetchCountryDetail(newcountry);
     this.setState({newdata: fetchedData, newcountry: newcountry});
     const fetchedCountries = await fetchCountries()
     fetchedCountries.map((aCountry) => {
