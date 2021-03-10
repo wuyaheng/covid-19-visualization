@@ -13,13 +13,13 @@ body {
   margin: 0 auto !important;
 }
   #map-container {
-    height: 550px;
-    border-radius: 5px;
+    height: 500px;
+    border-radius: 3px;
   }
 
   #mapid {
-    height: 550px;
-    border-radius: 5px;
+    height: 500px;
+    border-radius: 3px;
   }
   
   .leaflet-popup-content {
@@ -107,7 +107,7 @@ canvas {
 }
 
 .lineChartCard {
-  height: 390px !important;
+  height: 360px !important;
   margin-bottom: 1rem !important;
 }
 
@@ -145,7 +145,7 @@ canvas {
 
 .card {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .form-select {
@@ -164,4 +164,17 @@ select:focus {
   box-shadow: none !important;
   outline: #eee !important;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+.MuiCardContent-root {
+  padding: 10px !important;
+}
+
+.MuiPaper-rounded {
+  border-radius: 3px !important;
+}
+
+span {
+  font-size: 14px !important;
 }
