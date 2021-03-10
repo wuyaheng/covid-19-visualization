@@ -30,14 +30,23 @@ class App extends Component {
 
   handleCountryChange = async (newcountry) => {
     const fetchedData = await fetchData(newcountry);
-    this.setState({newdata: fetchedData, newcountry: newcountry})
+    this.setState({newdata: fetchedData, newcountry: newcountry});
+    this.fetchdata()
   }
 
   fetchdata = () => {
+    if (this.state.newcountry !== '') {
+        let filteredGeo = geodata.features.filter((ele) => ele.properties.ADMIN===this.state.newcountry);
+        this.setState({
+          geo: filteredGeo
+        })
+    } else {
       this.setState({
         geo: geodata.features
       })
-  } 
+    }
+  }
+
 
   fetchConfirm = async () => { 
       const res = await axios.get(`${url}/confirmed`)
