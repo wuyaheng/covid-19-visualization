@@ -14,33 +14,33 @@ const url = 'https://covid19.mathdro.id/api';
 class App extends Component {
   state = {
     geo: [],
-    confirm: [],
-    newdata: {},
-    newcountry: '',
+    allcountriesdetail: [],
+    countrydetail: {},
+    sel_country: '',
     iso: ''
   }
 
 
   async componentDidMount() {
-    const fetchedData = await fetchCountryDetail();
-    this.setState({newdata: fetchedData});
+    const fetchCountryDetailData = await fetchCountryDetail();
+    this.setState({countrydetail: fetchCountryDetailData});
     const fetchedCountries = await fetchCountries()
     fetchedCountries.map((aCountry) => {
-      if (aCountry[0]===this.state.newcountry) {
+      if (aCountry[0]===this.state.sel_country) {
         this.setState({iso: aCountry[1]})
       }
     })
     this.fetchdata()
-    this.fetchConfirm()
+    this.fetchAllcountriesdetail()
   }
 
 
-  handleCountryChange = async (newcountry) => {
-    const fetchedData = await fetchCountryDetail(newcountry);
-    this.setState({newdata: fetchedData, newcountry: newcountry});
+  handleCountryChange = async (sel_country) => {
+    const fetchCountryDetailData = await fetchCountryDetail(sel_country);
+    this.setState({countrydetail: fetchCountryDetailData, sel_country: sel_country});
     const fetchedCountries = await fetchCountries()
     fetchedCountries.map((aCountry) => {
-      if (aCountry[0]===this.state.newcountry) {
+      if (aCountry[0]===this.state.sel_country) {
         this.setState({iso: aCountry[1]})
       }
     })
@@ -49,7 +49,7 @@ class App extends Component {
 
 
   fetchdata = () => {
-    if (this.state.newcountry !== '') {
+    if (this.state.sel_country !== '') {
         let filteredGeo = geodata.features.filter((ele) => ele.properties.ISO_A3==this.state.iso && ele.properties.ISO_A3!=='-99');
         this.setState({
           geo: filteredGeo
@@ -63,10 +63,10 @@ class App extends Component {
 
 
 
-  fetchConfirm = async () => { 
+  fetchAllcountriesdetail = async () => { 
       const res = await axios.get(`${url}/confirmed`)
       this.setState({
-      confirm: res.data
+        allcountriesdetail: res.data
     })
   }
 
@@ -75,7 +75,7 @@ class App extends Component {
 
     let data = {
       geoData: this.state.geo,
-      confirmData: this.state.confirm 
+      confirmData: this.state.allcountriesdetail 
     }
 
     let condensedData = data.confirmData.reduce(function(dict, item) {
@@ -112,7 +112,7 @@ class App extends Component {
 
     })
 
-    const { newdata, newcountry } = this.state;
+    const { countrydetail, sel_country } = this.state;
 
       return (
         <>
@@ -127,13 +127,13 @@ class App extends Component {
         <div className="row mb-0">
         <div className="col-md-4 text-center">
         <CountryPicker handleCountryChange={this.handleCountryChange}/>
-      <Cards newdata = {newdata} />
-      <Chart newdata={newdata} newcountry={newcountry}/>
+      <Cards newdata = {countrydetail} />
+      <Chart newdata={countrydetail} newcountry={sel_country}/>
 
         </div>
         <div className="col-md-8 mb-3">
         <div className="card">
-          <MapBox results = {updatedGeoData}/>
+          <MapBox results = {updatedGeoData}/> 
           </div>
         </div>
         </div>
