@@ -123,7 +123,7 @@ class App extends Component {
           </p>
         </div>
       </nav>
-        <div className="container-fluid mt-3">
+        <div className="container-fluid mt-2">
         <div className="row mb-0">
         <div className="col-md-4 text-center">
         <CountryPicker handleCountryChange={this.handleCountryChange}/>
