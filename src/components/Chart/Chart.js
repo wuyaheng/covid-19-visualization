@@ -12,6 +12,14 @@ const Chart = (props) => {
           ];
     
         let options = {
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem, data) {
+                var tooltipValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return parseInt(tooltipValue).toLocaleString();
+              }
+            }
+          },
           legend: {
             display: false
           },
