@@ -30,7 +30,7 @@ class App extends Component {
         this.setState({iso: aCountry[1]})
       }
     })
-    this.fetchdata()
+    this.filterData()
     this.fetchAllcountriesdetail()
   }
 
@@ -44,11 +44,11 @@ class App extends Component {
         this.setState({iso: aCountry[1]})
       }
     })
-    this.fetchdata()
+    this.filterData()
   }
 
 
-  fetchdata = () => {
+  filterData = () => {
     if (this.state.sel_country !== '') {
         let filteredGeo = geodata.features.filter((ele) => ele.properties.ISO_A3==this.state.iso && ele.properties.ISO_A3!=='-99');
         this.setState({
@@ -75,10 +75,10 @@ class App extends Component {
 
     let data = {
       geoData: this.state.geo,
-      confirmData: this.state.allcountriesdetail 
+      allCountriesDetailData: this.state.allcountriesdetail 
     }
 
-    let condensedData = data.confirmData.reduce(function(dict, item) {
+    let condensedData = data.allCountriesDetailData.reduce(function(dict, item) {
       let { confirmed, deaths, recovered, iso3, lastUpdate, lat, long } = item;
       let country = dict[iso3]
       if(country) {
