@@ -5,7 +5,7 @@ import Chart from './components/Chart/Chart';
 import CountryPicker from './components/CountryPicker/CountryPicker';
 import MapBox from "./components/MapBox/index";
 import geodata from "./data/countries.json";
-import { fetchData } from './API/index';
+import { fetchData, fetchCountries } from './API/index';
 import axios from "axios";
 
 
@@ -16,13 +16,20 @@ class App extends Component {
     geo: [],
     confirm: [],
     newdata: {},
-    newcountry: ''
+    newcountry: '',
+    iso: ''
   }
 
 
   async componentDidMount() {
     const fetchedData = await fetchData();
     this.setState({newdata: fetchedData});
+    const fetchedCountries = await fetchCountries()
+    fetchedCountries.map((aCountry) => {
+      if (aCountry[0]===this.state.newcountry) {
+        this.setState({iso: aCountry[1]})
+      }
+    })
     this.fetchdata()
     this.fetchConfirm()
   }
@@ -31,12 +38,19 @@ class App extends Component {
   handleCountryChange = async (newcountry) => {
     const fetchedData = await fetchData(newcountry);
     this.setState({newdata: fetchedData, newcountry: newcountry});
+    const fetchedCountries = await fetchCountries()
+    fetchedCountries.map((aCountry) => {
+      if (aCountry[0]===this.state.newcountry) {
+        this.setState({iso: aCountry[1]})
+      }
+    })
     this.fetchdata()
   }
 
+
   fetchdata = () => {
     if (this.state.newcountry !== '') {
-        let filteredGeo = geodata.features.filter((ele) => ele.properties.ADMIN===this.state.newcountry);
+        let filteredGeo = geodata.features.filter((ele) => ele.properties.ISO_A3==this.state.iso && ele.properties.ISO_A3!=='-99');
         this.setState({
           geo: filteredGeo
         })
@@ -46,6 +60,7 @@ class App extends Component {
       })
     }
   }
+
 
 
   fetchConfirm = async () => { 

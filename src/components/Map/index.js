@@ -72,7 +72,7 @@ function chooseDeathColor(d) {
 
       let confirmMap; 
       props.pins.length > 20 ? 
-      confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 2) : confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 5)
+      confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 2) : confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 4)
    
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
