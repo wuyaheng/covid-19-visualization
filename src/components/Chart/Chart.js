@@ -6,8 +6,8 @@ const Chart = (props) => {
 
     const BarChart = () => {
         const colorArray = [
-            "rgba(102, 194, 164, 0.8)",
             "rgba(252, 141, 89, 0.8)",
+            "rgba(102, 194, 164, 0.8)",
             "rgba(150, 150, 150, 0.8)"
           ];
     
@@ -73,10 +73,10 @@ const Chart = (props) => {
          return (
             <Bar
               data={{
-                labels: ["Recovered", "Confirmed", "Deaths" ],
+                labels: ["Confirmed", "Recovered", "Deaths" ],
                 datasets: [
                   {
-                    data: [props.newdata?.recovered?.value, props.newdata?.confirmed?.value, props.newdata?.deaths?.value], 
+                    data: [props.newdata?.confirmed?.value, props.newdata?.recovered?.value, props.newdata?.deaths?.value], 
                     backgroundColor: colorArray
                   },
                 ],

@@ -79,7 +79,7 @@ class App extends Component {
     }
 
     let condensedData = data.allCountriesDetailData.reduce(function(dict, item) {
-      let { confirmed, deaths, recovered, iso3, lat, long } = item;
+      let { confirmed, deaths, recovered, iso3, countryRegion, lat, long } = item;
       let country = dict[iso3]
       if(country) {
         country.deaths+=deaths
@@ -93,6 +93,7 @@ class App extends Component {
           deaths,
           recovered,
           iso3,
+          countryRegion, 
           lat,
           long
         }

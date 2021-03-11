@@ -1,7 +1,5 @@
 import React from "react";
 import L from "leaflet";
-import 'leaflet.markercluster';
-import moment from 'moment'
 
 
 export default (props) => {
@@ -65,14 +63,14 @@ function chooseDeathColor(d) {
       MAP_CONTAINER2.appendChild(MAP_ID);
 
       var layers = {
-        RecoverCases: new L.LayerGroup(),
         ConfirmCases: new L.LayerGroup(),
+        RecoverCases: new L.LayerGroup(),
         DeathCases: new L.LayerGroup()
       };
 
       let confirmMap; 
       props.pins.length > 20 ? 
-      confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 2) : confirmMap = L.map("mapid", {layers: [layers.RecoverCases]}).setView([props.lat, props.lon], 4)
+      confirmMap = L.map("mapid", {layers: [layers.ConfirmCases]}).setView([props.lat, props.lon], 2) : confirmMap = L.map("mapid", {layers: [layers.ConfirmCases]}).setView([props.lat, props.lon], 4)
    
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -88,12 +86,26 @@ function chooseDeathColor(d) {
       ).addTo(confirmMap);
 
       var baseMaps = {
-        "Recovered Cases": layers.RecoverCases,
         "Confirmed Cases": layers.ConfirmCases, 
+        "Recovered Cases": layers.RecoverCases,
         "Death Cases": layers.DeathCases
       }; 
 
-      L.control.layers(baseMaps, null,{collapsed:false}).addTo(confirmMap);
+      L.control.layers(baseMaps, null, {collapsed:false}).addTo(confirmMap);
+
+
+      var ConfirmLegend = L.control({position: "bottomleft"});
+      ConfirmLegend.onAdd = function () {
+        let Confirmdiv = L.DomUtil.create('div', 'info legend'),
+            confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
+            Confirmdiv.innerHTML += "<p class='legendLabel'>Confirmed Cases</p>"
+        for (var i = 0; i < confirmGrades.length; i++) {
+              Confirmdiv.innerHTML +=
+                '<i style="background:' + chooseConfirmColor(confirmGrades[i] + 1) + '"></i> ' +
+                confirmGrades[i] + (confirmGrades[i + 1] ? '&ndash;' + confirmGrades[i + 1] + '<br>' : '+');
+        }
+        return Confirmdiv;
+    };
 
 
       var RecoverLegend = L.control({position: "bottomleft"});
@@ -110,18 +122,6 @@ function chooseDeathColor(d) {
       };
 
 
-      var ConfirmLegend = L.control({position: "bottomleft"});
-      ConfirmLegend.onAdd = function () {
-        let Confirmdiv = L.DomUtil.create('div', 'info legend'),
-            confirmGrades = [0, 500, 1000, 10000, 100000, 1000000, 2500000, 5000000, 10000000, 20000000];
-            Confirmdiv.innerHTML += "<p class='legendLabel'>Confirmed Cases</p>"
-        for (var i = 0; i < confirmGrades.length; i++) {
-              Confirmdiv.innerHTML +=
-                '<i style="background:' + chooseConfirmColor(confirmGrades[i] + 1) + '"></i> ' +
-                confirmGrades[i] + (confirmGrades[i + 1] ? '&ndash;' + confirmGrades[i + 1] + '<br>' : '+');
-        }
-        return Confirmdiv;
-    };
 
     var DeathLegend = L.control({position: "bottomleft"});
     DeathLegend.onAdd = function () {
@@ -138,23 +138,21 @@ function chooseDeathColor(d) {
 
 
   
-  RecoverLegend.addTo(confirmMap);
-  var currentLegend = RecoverLegend;
+  ConfirmLegend.addTo(confirmMap);
+  var currentLegend = ConfirmLegend;
 
 
   confirmMap.on('baselayerchange', function (eventLayer) {
     console.log(eventLayer.name)
-    if (eventLayer.name === 'Recovered Cases') {
-      confirmMap.removeControl(currentLegend);
-        currentLegend = RecoverLegend;
-        RecoverLegend.addTo(confirmMap);
-    }
-    else if  (eventLayer.name === 'Confirmed Cases') {
+    if (eventLayer.name === 'Confirmed Cases') {
       confirmMap.removeControl(currentLegend);
         currentLegend = ConfirmLegend;
         ConfirmLegend.addTo(confirmMap);
-    }
-    else if  (eventLayer.name === 'Death Cases') {
+    } else if (eventLayer.name === 'Recovered Cases') {
+      confirmMap.removeControl(currentLegend);
+        currentLegend = RecoverLegend;
+        RecoverLegend.addTo(confirmMap);
+    } else if  (eventLayer.name === 'Death Cases') {
       confirmMap.removeControl(currentLegend);
         currentLegend = DeathLegend;
         DeathLegend.addTo(confirmMap);
@@ -187,40 +185,9 @@ function chooseDeathColor(d) {
                       confirmMap.fitBounds(event.target.getBounds()); 
                     }
                     });
-                    layer.addTo(layers.ConfirmCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p>"); 
+                    layer.addTo(layers.ConfirmCases).bindTooltip("<h6><b>" + feature?.properties?.ADMIN + "</b></h6> <hr> <p><b>Confirmed: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.confirmed)) + "</b></p>"); 
                 }
-                })
-
-
-
-                var geoJson = L.geoJson(props.pins, {
-                  style: function(feature) {
-                      return {
-                      color: "white",
-                      fillColor: chooseDeathColor(feature?.properties?.covid?.deaths), 
-                      fillOpacity: 0.7,
-                      weight: 1.5
-                      };
-                  },
-                  onEachFeature: function(feature, layer) {
-                      layer.on({
-                      mouseover: function() {
-                          this.setStyle({
-                          fillOpacity: 0.9
-                          });
-                      },
-                      mouseout: function() {
-                          this.setStyle({
-                            fillOpacity: 0.7
-                          })
-                      },
-                      click: function(event) {
-                        confirmMap.fitBounds(event.target.getBounds()); 
-                      }
-                      });
-                      layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
-                  }
-                  })
+                }).addTo(confirmMap);
 
                   var geoJson = L.geoJson(props.pins, {
                     style: function(feature) {
@@ -247,11 +214,40 @@ function chooseDeathColor(d) {
                           confirmMap.fitBounds(event.target.getBounds()); 
                         }
                         });
-                        layer.addTo(layers.RecoverCases).bindTooltip("<h6><b>" + feature.properties.ADMIN + "</b></h6> <hr> <p><b>Recover: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.recovered)) + "</b></p>"); 
+                        layer.addTo(layers.RecoverCases).bindTooltip("<h6><b>" + feature?.properties?.ADMIN + "</b></h6> <hr> <p><b>Recover: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.recovered)) + "</b></p>"); 
                     }
-                    }).addTo(confirmMap);
-    }
+                    })
 
+
+                    var geoJson = L.geoJson(props.pins, {
+                      style: function(feature) {
+                          return {
+                          color: "white",
+                          fillColor: chooseDeathColor(feature?.properties?.covid?.deaths), 
+                          fillOpacity: 0.7,
+                          weight: 1.5
+                          };
+                      },
+                      onEachFeature: function(feature, layer) {
+                          layer.on({
+                          mouseover: function() {
+                              this.setStyle({
+                              fillOpacity: 0.9
+                              });
+                          },
+                          mouseout: function() {
+                              this.setStyle({
+                                fillOpacity: 0.7
+                              })
+                          },
+                          click: function(event) {
+                            confirmMap.fitBounds(event.target.getBounds()); 
+                          }
+                          });
+                          layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature?.properties?.covid?.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
+                      }
+                      })
+    }
     return () => (MAP_CONTAINER2.innerHTML = "");
   }, [props.lat, props.lon, props.pins]);
 
