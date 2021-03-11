@@ -50,7 +50,7 @@ class App extends Component {
 
   filterData = () => {
     if (this.state.sel_country !== '') {
-        let filteredGeo = geodata.features.filter((ele) => ele.properties.ISO_A3==this.state.iso && ele.properties.ISO_A3!=='-99');
+        let filteredGeo = geodata.features.filter((ele) => ele.properties.ISO_A3==this.state.iso);
         this.setState({
           geo: filteredGeo
         })
@@ -79,13 +79,12 @@ class App extends Component {
     }
 
     let condensedData = data.allCountriesDetailData.reduce(function(dict, item) {
-      let { confirmed, deaths, recovered, iso3, lastUpdate, lat, long } = item;
+      let { confirmed, deaths, recovered, iso3, lat, long } = item;
       let country = dict[iso3]
       if(country) {
         country.deaths+=deaths
         country.confirmed+=confirmed
         country.recovered+=recovered
-        country.lastUpdate=lastUpdate
         country.lat=lat || country.lat
         country.long=long ? long: country.long
       } else {
@@ -93,7 +92,7 @@ class App extends Component {
           confirmed,
           deaths,
           recovered,
-          lastUpdate,
+          iso3,
           lat,
           long
         }
