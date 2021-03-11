@@ -8,6 +8,11 @@ body {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);
   }
 
+.navbar {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+
 .navbar-brand {
   color: #555555 !important;
   margin: 0 auto !important;
@@ -75,7 +80,7 @@ canvas {
 }
 
 .lineChartCard {
-  height: 367px !important;
+  height: 366px !important;
   margin-bottom: 1rem !important;
 }
 
