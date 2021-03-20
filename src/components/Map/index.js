@@ -244,7 +244,7 @@ function chooseDeathColor(d) {
                             confirmMap.fitBounds(event.target.getBounds()); 
                           }
                           });
-                          layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature?.properties?.covid?.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
+                          layer.addTo(layers.DeathCases).bindTooltip("<h6><b>" + feature?.properties?.ADMIN + "</b></h6> <hr> <p><b>Death: " + numberWithCommas(fixUndefined(feature?.properties?.covid?.deaths)) + "</b></p>"); 
                       }
                       })
     }
